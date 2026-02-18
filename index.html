@@ -7,339 +7,137 @@
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Lateef&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
-
 body {
-  min-height: 100vh;
-  background: #050510;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Amiri', serif;
-  overflow: hidden;
-  position: relative;
+  min-height:100vh; background:#050510;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Amiri',serif; overflow:hidden; position:relative;
 }
-
-/* SKY */
-.sky {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 0%, #1a0a3a 0%, #050510 60%);
-  z-index: 0;
-}
-
-/* AURORA */
+.sky { position:fixed; inset:0; background:radial-gradient(ellipse at 50% 0%,#1a0a3a,#050510 60%); z-index:0; }
 .aurora {
-  position: fixed;
-  top: -30%; left: -20%;
-  width: 140%; height: 70%;
-  background: conic-gradient(from 180deg at 50% 0%,
-    transparent 30%,
-    rgba(120,40,180,0.12) 45%,
-    rgba(200,100,255,0.08) 55%,
-    transparent 70%
-  );
-  animation: auroraShift 12s ease-in-out infinite alternate;
-  z-index: 0;
-  pointer-events: none;
-  filter: blur(40px);
+  position:fixed; top:-30%; left:-20%; width:140%; height:70%;
+  background:conic-gradient(from 180deg at 50% 0%,transparent 30%,rgba(120,40,180,.12) 45%,rgba(200,100,255,.08) 55%,transparent 70%);
+  animation:auroraShift 12s ease-in-out infinite alternate; z-index:0; pointer-events:none; filter:blur(40px);
 }
-@keyframes auroraShift {
-  0%   { transform: translateX(-10%) scaleY(1); opacity:0.6; }
-  100% { transform: translateX(10%) scaleY(1.3); opacity:1; }
-}
-
-/* STARS */
+@keyframes auroraShift { 0%{transform:translateX(-10%) scaleY(1);opacity:.6} 100%{transform:translateX(10%) scaleY(1.3);opacity:1} }
 #stars { position:fixed; inset:0; z-index:1; pointer-events:none; }
-.star {
-  position: absolute;
-  background: #fff;
-  border-radius: 50%;
-  animation: twinkle var(--d) ease-in-out infinite alternate;
-  animation-delay: var(--delay);
-}
-@keyframes twinkle {
-  from { opacity:0.1; transform:scale(0.8); }
-  to   { opacity:1;   transform:scale(1.5); }
-}
-
-/* SHOOTING STARS */
+.star { position:absolute; background:#fff; border-radius:50%; animation:twinkle var(--d) ease-in-out infinite alternate; animation-delay:var(--delay); }
+@keyframes twinkle { from{opacity:.1;transform:scale(.8)} to{opacity:1;transform:scale(1.5)} }
 .shooting { position:fixed; inset:0; z-index:2; pointer-events:none; overflow:hidden; }
-.shoot {
-  position: absolute;
-  width: 120px; height: 1.5px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.9), transparent);
-  border-radius: 2px;
-  animation: shoot var(--ds) ease-in infinite;
-  animation-delay: var(--dlay);
-  opacity: 0;
-}
-@keyframes shoot {
-  0%   { transform:translateX(0) translateY(0) rotate(-35deg); opacity:1; }
-  100% { transform:translateX(500px) translateY(300px) rotate(-35deg); opacity:0; }
-}
-
-/* MOON */
-.moon-wrap {
-  position: fixed;
-  top: 28px; right: 60px;
-  z-index: 3;
-  animation: floatMoon 7s ease-in-out infinite;
-}
-@keyframes floatMoon {
-  0%,100% { transform:translateY(0) rotate(-2deg); }
-  50%      { transform:translateY(-14px) rotate(2deg); }
-}
-.moon {
-  width:100px; height:100px;
-  border-radius:50%;
-  background: radial-gradient(circle at 38% 38%, #fff9c4, #f5c842 50%, #c8860a);
-  box-shadow:
-    0 0 30px 8px rgba(245,200,66,0.55),
-    0 0 80px 20px rgba(245,200,66,0.25),
-    0 0 160px 40px rgba(245,160,0,0.1);
-  position: relative;
-}
-.moon::after {
-  content:'';
-  position:absolute;
-  top:10px; left:22px;
-  width:86px; height:86px;
-  border-radius:50%;
-  background:#080818;
-}
-.moon-glow {
-  position:absolute; inset:-20px;
-  border-radius:50%;
-  background: radial-gradient(circle, rgba(245,200,66,0.15) 0%, transparent 70%);
-  animation: moonGlow 3s ease-in-out infinite alternate;
-}
-@keyframes moonGlow {
-  from { transform:scale(1); opacity:0.7; }
-  to   { transform:scale(1.15); opacity:1; }
-}
-.moon-stars span {
-  position:absolute; color:#f5c842;
-  font-size:1rem;
-  animation: sparkMoon 2s ease-in-out infinite alternate;
-}
-.moon-stars span:nth-child(1) { top:-20px; left:30px; animation-delay:0s; }
-.moon-stars span:nth-child(2) { top:10px; left:-25px; animation-delay:.5s; font-size:.7rem; }
-.moon-stars span:nth-child(3) { top:-10px; right:-20px; animation-delay:1s; font-size:.8rem; }
-@keyframes sparkMoon {
-  from { opacity:.3; transform:scale(.8); }
-  to   { opacity:1;  transform:scale(1.3); }
-}
-
-/* LANTERNS */
+.shoot { position:absolute; width:120px; height:1.5px; background:linear-gradient(90deg,rgba(255,255,255,.9),transparent); border-radius:2px; animation:shoot var(--ds) ease-in infinite; animation-delay:var(--dlay); opacity:0; }
+@keyframes shoot { 0%{transform:translateX(0) translateY(0) rotate(-35deg);opacity:1} 100%{transform:translateX(500px) translateY(300px) rotate(-35deg);opacity:0} }
+.moon-wrap { position:fixed; top:28px; right:60px; z-index:3; animation:floatMoon 7s ease-in-out infinite; }
+@keyframes floatMoon { 0%,100%{transform:translateY(0) rotate(-2deg)} 50%{transform:translateY(-14px) rotate(2deg)} }
+.moon { width:100px; height:100px; border-radius:50%; background:radial-gradient(circle at 38% 38%,#fff9c4,#f5c842 50%,#c8860a); box-shadow:0 0 30px 8px rgba(245,200,66,.55),0 0 80px 20px rgba(245,200,66,.25),0 0 160px 40px rgba(245,160,0,.1); position:relative; }
+.moon::after { content:''; position:absolute; top:10px; left:22px; width:86px; height:86px; border-radius:50%; background:#080818; }
+.moon-glow { position:absolute; inset:-20px; border-radius:50%; background:radial-gradient(circle,rgba(245,200,66,.15),transparent 70%); animation:moonGlow 3s ease-in-out infinite alternate; }
+@keyframes moonGlow { from{transform:scale(1);opacity:.7} to{transform:scale(1.15);opacity:1} }
+.moon-stars span { position:absolute; color:#f5c842; font-size:1rem; animation:sparkMoon 2s ease-in-out infinite alternate; }
+.moon-stars span:nth-child(1){top:-20px;left:30px;animation-delay:0s}
+.moon-stars span:nth-child(2){top:10px;left:-25px;animation-delay:.5s;font-size:.7rem}
+.moon-stars span:nth-child(3){top:-10px;right:-20px;animation-delay:1s;font-size:.8rem}
+@keyframes sparkMoon { from{opacity:.3;transform:scale(.8)} to{opacity:1;transform:scale(1.3)} }
 .lanterns { position:fixed; top:0; left:0; width:100%; z-index:3; pointer-events:none; }
 .lw { position:absolute; top:0; display:flex; flex-direction:column; align-items:center; }
-.lw:nth-child(1) { left:7%; }
-.lw:nth-child(2) { left:20%; }
-.lw:nth-child(3) { right:7%; }
-.lw:nth-child(4) { right:20%; }
-.lw:nth-child(5) { left:48%; }
+.lw:nth-child(1){left:7%} .lw:nth-child(2){left:20%} .lw:nth-child(3){right:7%} .lw:nth-child(4){right:20%} .lw:nth-child(5){left:48%}
+.ls { width:1px; background:linear-gradient(to bottom,rgba(255,220,100,.6),rgba(255,220,100,.1)); }
+.lw:nth-child(1) .ls{height:28px} .lw:nth-child(2) .ls{height:55px} .lw:nth-child(3) .ls{height:38px} .lw:nth-child(4) .ls{height:65px} .lw:nth-child(5) .ls{height:18px}
+.lb { width:34px; height:50px; border-radius:6px 6px 10px 10px; position:relative; display:flex; align-items:center; justify-content:center; animation:swingL var(--sw) ease-in-out infinite; transform-origin:top center; box-shadow:0 0 20px 6px var(--glow); }
+.lb::before{content:'';position:absolute;inset:0;border-radius:inherit;background:var(--col);opacity:.9}
+.lb::after{content:'';position:absolute;inset:4px;border-radius:4px 4px 8px 8px;background:rgba(255,255,255,.1)}
+.li{position:relative;z-index:1;font-size:1rem}
+.lc{width:42px;height:7px;background:linear-gradient(90deg,#8b6914,#f5c842,#8b6914);border-radius:3px;margin:-2px auto 0}
+.lct{width:28px;height:6px;background:linear-gradient(90deg,#8b6914,#f5c842,#8b6914);border-radius:3px 3px 0 0;margin:0 auto -2px}
+.lgr{position:absolute;inset:-8px;border-radius:50%;background:radial-gradient(circle,var(--glow),transparent 70%);animation:lPulse var(--sw) ease-in-out infinite alternate}
+@keyframes lPulse{from{opacity:.5;transform:scale(.9)}to{opacity:1;transform:scale(1.2)}}
+@keyframes swingL{0%{transform:rotate(calc(var(--ang)*-1))}50%{transform:rotate(var(--ang))}100%{transform:rotate(calc(var(--ang)*-1))}}
+.lw:nth-child(1) .lb{--sw:3.2s;--ang:10deg;--col:linear-gradient(160deg,#cc2200,#ff4422);--glow:rgba(255,80,30,.5)}
+.lw:nth-child(2) .lb{--sw:4.1s;--ang:8deg;--col:linear-gradient(160deg,#007733,#00bb55);--glow:rgba(0,180,70,.4);animation-delay:.5s}
+.lw:nth-child(3) .lb{--sw:3.7s;--ang:12deg;--col:linear-gradient(160deg,#7700bb,#aa33ff);--glow:rgba(160,50,255,.5);animation-delay:.9s}
+.lw:nth-child(4) .lb{--sw:4.5s;--ang:9deg;--col:linear-gradient(160deg,#bb7700,#ffbb00);--glow:rgba(255,185,0,.5);animation-delay:.3s}
+.lw:nth-child(5) .lb{--sw:2.9s;--ang:7deg;--col:linear-gradient(160deg,#cc1155,#ff3388);--glow:rgba(255,50,140,.5);animation-delay:1.1s}
+.particles{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.particle{position:absolute;bottom:-20px;border-radius:50%;animation:riseP var(--pr) ease-in infinite;animation-delay:var(--pd);opacity:0}
+@keyframes riseP{0%{transform:translateY(0) translateX(0) scale(.5);opacity:.6}50%{transform:translateY(-40vh) translateX(var(--px)) scale(1);opacity:.3}100%{transform:translateY(-90vh) translateX(calc(var(--px)*2)) scale(.3);opacity:0}}
+.mosaic-top,.mosaic-bottom{position:fixed;left:0;right:0;height:70px;z-index:2;pointer-events:none;opacity:.14}
+.mosaic-top{top:0}.mosaic-bottom{bottom:0}
+.mosaic-top,.mosaic-bottom{background:repeating-linear-gradient(90deg,#f5c842 0,#f5c842 2px,transparent 2px,transparent 18px),repeating-linear-gradient(0deg,#f5c842 0,#f5c842 2px,transparent 2px,transparent 18px)}
+.fireworks{position:fixed;inset:0;z-index:50;pointer-events:none;overflow:hidden}
+.firework{position:absolute;width:6px;height:6px;border-radius:50%;animation:fwBurst .9s ease-out forwards;opacity:0}
+@keyframes fwBurst{0%{transform:translate(0,0) scale(.2);opacity:1}80%{opacity:.8}100%{transform:translate(var(--fx),var(--fy)) scale(0);opacity:0}}
+.confetti-wrap{position:fixed;inset:0;z-index:49;pointer-events:none;overflow:hidden}
+.conf{position:absolute;top:-20px;font-size:var(--fs);animation:confFall var(--cf) ease-in forwards;animation-delay:var(--cd);opacity:0}
+@keyframes confFall{0%{transform:translateY(-20px) translateX(0) rotate(0);opacity:1}100%{transform:translateY(110vh) translateX(var(--cx)) rotate(720deg);opacity:0}}
 
-.ls  { width:1px; background:linear-gradient(to bottom,rgba(255,220,100,.6),rgba(255,220,100,.1)); }
-.lw:nth-child(1) .ls { height:28px; }
-.lw:nth-child(2) .ls { height:55px; }
-.lw:nth-child(3) .ls { height:38px; }
-.lw:nth-child(4) .ls { height:65px; }
-.lw:nth-child(5) .ls { height:18px; }
-
-.lb {
-  width:34px; height:50px;
-  border-radius:6px 6px 10px 10px;
-  position:relative;
+/* ── MUSIC PLAYER ── */
+.music-player {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  background: rgba(10,8,28,.85);
+  border: 1px solid rgba(245,200,66,.3);
+  border-radius: 60px;
+  padding: 10px 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 4px 30px rgba(0,0,0,.6), 0 0 20px rgba(245,200,66,.08);
+  min-width: 280px;
+  animation: cardIn 1.2s cubic-bezier(.22,1,.36,1) both;
+  animation-delay: .4s;
+}
+.mp-icon { font-size:1.4rem; flex-shrink:0; animation:iconPulse 2s ease-in-out infinite alternate; }
+@keyframes iconPulse{from{filter:drop-shadow(0 0 4px rgba(245,200,66,.4))}to{filter:drop-shadow(0 0 12px rgba(245,200,66,.9))}}
+.mp-info { flex:1; min-width:0; }
+.mp-title { color:#f5c842; font-size:.95rem; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.mp-sub   { color:rgba(255,255,255,.35); font-size:.75rem; margin-top:2px; }
+.mp-controls { display:flex; align-items:center; gap:8px; }
+.mp-btn {
+  width:36px; height:36px; border-radius:50%;
+  border:1px solid rgba(245,200,66,.4);
+  background:rgba(245,200,66,.08); color:#f5c842;
+  font-size:1rem; cursor:pointer;
   display:flex; align-items:center; justify-content:center;
-  animation:swingL var(--sw) ease-in-out infinite;
-  transform-origin:top center;
-  box-shadow:0 0 20px 6px var(--glow);
+  transition:background .2s,transform .15s,box-shadow .2s;
+  flex-shrink:0;
 }
-.lb::before { content:''; position:absolute; inset:0; border-radius:inherit; background:var(--col); opacity:.9; }
-.lb::after  { content:''; position:absolute; inset:4px; border-radius:4px 4px 8px 8px; background:rgba(255,255,255,.1); }
-.li { position:relative; z-index:1; font-size:1rem; }
-.lc { width:42px; height:7px; background:linear-gradient(90deg,#8b6914,#f5c842,#8b6914); border-radius:3px; margin:-2px auto 0; }
-.lct { width:28px; height:6px; background:linear-gradient(90deg,#8b6914,#f5c842,#8b6914); border-radius:3px 3px 0 0; margin:0 auto -2px; }
-.lgr { position:absolute; inset:-8px; border-radius:50%; background:radial-gradient(circle,var(--glow) 0%,transparent 70%); animation:lPulse var(--sw) ease-in-out infinite alternate; }
-@keyframes lPulse { from{opacity:.5;transform:scale(.9);} to{opacity:1;transform:scale(1.2);} }
-@keyframes swingL {
-  0%   { transform:rotate(calc(var(--ang)*-1)); }
-  50%  { transform:rotate(var(--ang)); }
-  100% { transform:rotate(calc(var(--ang)*-1)); }
-}
-.lw:nth-child(1) .lb { --sw:3.2s;--ang:10deg;--col:linear-gradient(160deg,#cc2200,#ff4422);--glow:rgba(255,80,30,.5); }
-.lw:nth-child(2) .lb { --sw:4.1s;--ang:8deg;--col:linear-gradient(160deg,#007733,#00bb55);--glow:rgba(0,180,70,.4);animation-delay:.5s; }
-.lw:nth-child(3) .lb { --sw:3.7s;--ang:12deg;--col:linear-gradient(160deg,#7700bb,#aa33ff);--glow:rgba(160,50,255,.5);animation-delay:.9s; }
-.lw:nth-child(4) .lb { --sw:4.5s;--ang:9deg;--col:linear-gradient(160deg,#bb7700,#ffbb00);--glow:rgba(255,185,0,.5);animation-delay:.3s; }
-.lw:nth-child(5) .lb { --sw:2.9s;--ang:7deg;--col:linear-gradient(160deg,#cc1155,#ff3388);--glow:rgba(255,50,140,.5);animation-delay:1.1s; }
-
-/* PARTICLES */
-.particles { position:fixed; inset:0; z-index:2; pointer-events:none; overflow:hidden; }
-.particle {
-  position:absolute; bottom:-20px; border-radius:50%;
-  animation:riseP var(--pr) ease-in infinite;
-  animation-delay:var(--pd);
-  opacity:0;
-}
-@keyframes riseP {
-  0%   { transform:translateY(0) translateX(0) scale(.5); opacity:.6; }
-  50%  { transform:translateY(-40vh) translateX(var(--px)) scale(1); opacity:.3; }
-  100% { transform:translateY(-90vh) translateX(calc(var(--px)*2)) scale(.3); opacity:0; }
-}
-
-/* MOSAIC BANDS */
-.mosaic-top,.mosaic-bottom {
-  position:fixed; left:0; right:0; height:70px; z-index:2; pointer-events:none; opacity:.14;
-}
-.mosaic-top    { top:0; }
-.mosaic-bottom { bottom:0; }
-.mosaic-top, .mosaic-bottom {
-  background:
-    repeating-linear-gradient(90deg,#f5c842 0,#f5c842 2px,transparent 2px,transparent 18px),
-    repeating-linear-gradient(0deg,#f5c842 0,#f5c842 2px,transparent 2px,transparent 18px);
-}
-
-/* FIREWORKS */
-.fireworks { position:fixed; inset:0; z-index:50; pointer-events:none; overflow:hidden; }
-.firework {
-  position:absolute; width:6px; height:6px; border-radius:50%;
-  animation:fwBurst .9s ease-out forwards; opacity:0;
-}
-@keyframes fwBurst {
-  0%   { transform:translate(0,0) scale(.2); opacity:1; }
-  80%  { opacity:.8; }
-  100% { transform:translate(var(--fx),var(--fy)) scale(0); opacity:0; }
-}
-
-/* CONFETTI */
-.confetti-wrap { position:fixed; inset:0; z-index:49; pointer-events:none; overflow:hidden; }
-.conf {
-  position:absolute; top:-20px; font-size:var(--fs);
-  animation:confFall var(--cf) ease-in forwards;
-  animation-delay:var(--cd); opacity:0;
-}
-@keyframes confFall {
-  0%   { transform:translateY(-20px) translateX(0) rotate(0); opacity:1; }
-  100% { transform:translateY(110vh) translateX(var(--cx)) rotate(720deg); opacity:0; }
-}
+.mp-btn:hover{background:rgba(245,200,66,.2);transform:scale(1.1);box-shadow:0 0 12px rgba(245,200,66,.3)}
+.mp-btn.active{background:rgba(245,200,66,.25);box-shadow:0 0 16px rgba(245,200,66,.4)}
+.mp-vol { width:60px; height:3px; -webkit-appearance:none; appearance:none; background:rgba(255,255,255,.15); border-radius:3px; outline:none; cursor:pointer; }
+.mp-vol::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:#f5c842;box-shadow:0 0 6px rgba(245,200,66,.6)}
+/* Visualizer bars */
+.visualizer { display:flex; align-items:flex-end; gap:2px; height:22px; }
+.vbar { width:3px; background:linear-gradient(to top,#f5c842,#ffeeaa); border-radius:2px; transform-origin:bottom; animation:none; }
+.vbar.active { animation:barDance var(--bd) ease-in-out infinite alternate; }
+@keyframes barDance{from{transform:scaleY(.15);opacity:.5}to{transform:scaleY(1);opacity:1}}
 
 /* CARD */
-.card {
-  position:relative; z-index:10;
-  background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
-  border:1px solid rgba(245,200,66,.28);
-  border-radius:28px;
-  padding:48px 40px 40px;
-  width:min(480px,92vw);
-  text-align:center;
-  backdrop-filter:blur(18px);
-  box-shadow:0 8px 60px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.1);
-  animation:cardIn 1s cubic-bezier(.22,1,.36,1) both;
-}
-@keyframes cardIn {
-  from { opacity:0; transform:translateY(40px) scale(.95); }
-  to   { opacity:1; transform:translateY(0) scale(1); }
-}
-
-.ornament {
-  color:#f5c842; font-size:1.3rem; letter-spacing:8px;
-  margin-bottom:12px; opacity:.6;
-  animation:ornGlow 3s ease-in-out infinite alternate;
-}
-@keyframes ornGlow {
-  from { opacity:.4; text-shadow:none; }
-  to   { opacity:.9; text-shadow:0 0 12px rgba(245,200,66,.7); }
-}
-.title {
-  font-family:'Lateef',serif; font-size:3rem;
-  color:#f5c842; line-height:1.1; margin-bottom:4px;
-  animation:titleShimmer 4s ease-in-out infinite alternate;
-}
-@keyframes titleShimmer {
-  from { text-shadow:0 0 20px rgba(245,200,66,.4); }
-  to   { text-shadow:0 0 40px rgba(245,200,66,.9),0 0 80px rgba(245,160,0,.3); }
-}
-.subtitle { color:rgba(255,255,255,.36); font-size:.93rem; margin-bottom:28px; letter-spacing:.07em; }
-
-/* INPUT */
-.ig { position:relative; margin-bottom:18px; }
-.ig input {
-  width:100%; padding:14px 20px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(245,200,66,.28);
-  border-radius:14px; color:#fff;
-  font-family:'Amiri',serif; font-size:1.18rem;
-  text-align:center; outline:none;
-  transition:border-color .3s,box-shadow .3s,background .3s;
-}
-.ig input::placeholder { color:rgba(255,255,255,.28); }
-.ig input:focus {
-  border-color:#f5c842;
-  box-shadow:0 0 0 3px rgba(245,200,66,.15),0 0 20px rgba(245,200,66,.1);
-  background:rgba(255,255,255,.09);
-}
-
-/* BUTTON */
-.btn {
-  width:100%; padding:15px 24px;
-  background:linear-gradient(135deg,#f5c842,#e8980a);
-  border:none; border-radius:14px;
-  color:#0a0a1a;
-  font-family:'Amiri',serif; font-size:1.2rem; font-weight:700;
-  cursor:pointer;
-  transition:transform .2s,box-shadow .2s;
-  box-shadow:0 4px 24px rgba(245,200,66,.4),inset 0 2px 0 rgba(255,255,255,.1);
-  display:flex; align-items:center; justify-content:center; gap:10px;
-  position:relative; overflow:hidden;
-}
-.btn::before {
-  content:''; position:absolute;
-  top:-50%; left:-60%; width:60%; height:200%;
-  background:rgba(255,255,255,.15); transform:skewX(-20deg);
-  animation:btnShine 3s ease-in-out infinite;
-}
-@keyframes btnShine {
-  0%   { left:-60%; opacity:0; }
-  20%  { opacity:1; }
-  40%  { left:120%; opacity:0; }
-  100% { left:120%; opacity:0; }
-}
-.btn:hover { transform:translateY(-3px); box-shadow:0 8px 32px rgba(245,200,66,.55); }
-.btn:active { transform:translateY(-1px); }
-
-/* GREETING */
-.greeting-box {
-  margin-top:22px; padding:22px 20px;
-  background:rgba(245,200,66,.05);
-  border:1px solid rgba(245,200,66,.18);
-  border-radius:16px; color:#f5e9b8;
-  font-size:1.2rem; line-height:1.9;
-  display:none;
-  animation:fadeUp .7s cubic-bezier(.22,1,.36,1);
-  position:relative;
-}
-.greeting-box::before {
-  content:'❝'; position:absolute; top:8px; right:14px;
-  font-size:2rem; color:rgba(245,200,66,.2); font-family:serif;
-}
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(16px); }
-  to   { opacity:1; transform:translateY(0); }
-}
-
-/* AUDIO */
-.audio-controls { margin-top:14px; display:none; flex-direction:column; gap:10px; animation:fadeUp .7s ease; }
-.audio-btn {
-  padding:12px; border-radius:12px;
-  border:1px solid rgba(245,200,66,.3);
-  background:rgba(255,255,255,.04); color:#f5c842;
-  font-family:'Amiri',serif; font-size:1.05rem;
-  cursor:pointer;
-  transition:background .2s,border-color .2s,transform .15s;
-}
-.audio-btn:hover { background:rgba(245,200,66,.1); border-color:#f5c842; transform:translateY(-1px); }
-.audio-btn.playing { background:rgba(245,200,66,.16); }
-.status { margin-top:10px; font-size:.88rem; color:rgba(255,255,255,.32); min-height:18px; transition:color .3s; }
+.card{position:relative;z-index:10;background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid rgba(245,200,66,.28);border-radius:28px;padding:48px 40px 40px;width:min(480px,92vw);text-align:center;backdrop-filter:blur(18px);box-shadow:0 8px 60px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.1);animation:cardIn 1s cubic-bezier(.22,1,.36,1) both}
+@keyframes cardIn{from{opacity:0;transform:translateY(40px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+.ornament{color:#f5c842;font-size:1.3rem;letter-spacing:8px;margin-bottom:12px;opacity:.6;animation:ornGlow 3s ease-in-out infinite alternate}
+@keyframes ornGlow{from{opacity:.4;text-shadow:none}to{opacity:.9;text-shadow:0 0 12px rgba(245,200,66,.7)}}
+.title{font-family:'Lateef',serif;font-size:3rem;color:#f5c842;line-height:1.1;margin-bottom:4px;animation:titleShimmer 4s ease-in-out infinite alternate}
+@keyframes titleShimmer{from{text-shadow:0 0 20px rgba(245,200,66,.4)}to{text-shadow:0 0 40px rgba(245,200,66,.9),0 0 80px rgba(245,160,0,.3)}}
+.subtitle{color:rgba(255,255,255,.36);font-size:.93rem;margin-bottom:28px;letter-spacing:.07em}
+.ig{position:relative;margin-bottom:18px}
+.ig input{width:100%;padding:14px 20px;background:rgba(255,255,255,.06);border:1px solid rgba(245,200,66,.28);border-radius:14px;color:#fff;font-family:'Amiri',serif;font-size:1.18rem;text-align:center;outline:none;transition:border-color .3s,box-shadow .3s,background .3s}
+.ig input::placeholder{color:rgba(255,255,255,.28)}
+.ig input:focus{border-color:#f5c842;box-shadow:0 0 0 3px rgba(245,200,66,.15);background:rgba(255,255,255,.09)}
+.btn{width:100%;padding:15px 24px;background:linear-gradient(135deg,#f5c842,#e8980a);border:none;border-radius:14px;color:#0a0a1a;font-family:'Amiri',serif;font-size:1.2rem;font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 24px rgba(245,200,66,.4),inset 0 2px 0 rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden}
+.btn::before{content:'';position:absolute;top:-50%;left:-60%;width:60%;height:200%;background:rgba(255,255,255,.15);transform:skewX(-20deg);animation:btnShine 3s ease-in-out infinite}
+@keyframes btnShine{0%{left:-60%;opacity:0}20%{opacity:1}40%{left:120%;opacity:0}100%{left:120%;opacity:0}}
+.btn:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(245,200,66,.55)}
+.btn:active{transform:translateY(-1px)}
+.greeting-box{margin-top:22px;padding:22px 20px;background:rgba(245,200,66,.05);border:1px solid rgba(245,200,66,.18);border-radius:16px;color:#f5e9b8;font-size:1.2rem;line-height:1.9;display:none;animation:fadeUp .7s cubic-bezier(.22,1,.36,1);position:relative}
+.greeting-box::before{content:'❝';position:absolute;top:8px;right:14px;font-size:2rem;color:rgba(245,200,66,.2);font-family:serif}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.audio-controls{margin-top:14px;display:none;flex-direction:column;gap:10px;animation:fadeUp .7s ease}
+.audio-btn{padding:12px;border-radius:12px;border:1px solid rgba(245,200,66,.3);background:rgba(255,255,255,.04);color:#f5c842;font-family:'Amiri',serif;font-size:1.05rem;cursor:pointer;transition:background .2s,border-color .2s,transform .15s}
+.audio-btn:hover{background:rgba(245,200,66,.1);border-color:#f5c842;transform:translateY(-1px)}
+.audio-btn.playing{background:rgba(245,200,66,.16)}
+.status{margin-top:10px;font-size:.88rem;color:rgba(255,255,255,.32);min-height:18px;transition:color .3s}
 </style>
 </head>
 <body>
@@ -348,14 +146,10 @@ body {
 <div class="aurora"></div>
 <div id="stars"></div>
 <div class="shooting" id="shooting"></div>
-
-<!-- Moon -->
 <div class="moon-wrap">
   <div class="moon-stars"><span>✦</span><span>✧</span><span>✦</span></div>
   <div class="moon"><div class="moon-glow"></div></div>
 </div>
-
-<!-- Lanterns -->
 <div class="lanterns">
   <div class="lw"><div class="lct"></div><div class="ls"></div><div class="lc"></div><div class="lb"><div class="lgr"></div><div class="li">🕌</div></div><div class="lc"></div></div>
   <div class="lw"><div class="lct"></div><div class="ls"></div><div class="lc"></div><div class="lb"><div class="lgr"></div><div class="li">🌙</div></div><div class="lc"></div></div>
@@ -363,114 +157,305 @@ body {
   <div class="lw"><div class="lct"></div><div class="ls"></div><div class="lc"></div><div class="lb"><div class="lgr"></div><div class="li">🕌</div></div><div class="lc"></div></div>
   <div class="lw"><div class="lct"></div><div class="ls"></div><div class="lc"></div><div class="lb"><div class="lgr"></div><div class="li">✨</div></div><div class="lc"></div></div>
 </div>
-
 <div class="mosaic-top"></div>
 <div class="mosaic-bottom"></div>
 <div class="particles" id="particles"></div>
 <div class="fireworks" id="fireworks"></div>
 <div class="confetti-wrap" id="confetti"></div>
 
+<!-- MUSIC PLAYER -->
+<div class="music-player" id="musicPlayer">
+  <div class="mp-icon">🕌</div>
+  <div class="mp-info">
+    <div class="mp-title" id="mpTitle">أنشودة رمضان</div>
+    <div class="mp-sub" id="mpSub">كتشتغل تلقائياً في الخلفية</div>
+  </div>
+  <div class="visualizer" id="visualizer"></div>
+  <div class="mp-controls">
+    <button class="mp-btn" id="prevBtn" onclick="prevTrack()" title="السابق">⏮</button>
+    <button class="mp-btn" id="playMusicBtn" onclick="toggleMusic()" title="تشغيل">▶</button>
+    <button class="mp-btn" id="nextBtn" onclick="nextTrack()" title="التالي">⏭</button>
+  </div>
+  <input type="range" class="mp-vol" id="volSlider" min="0" max="100" value="60" oninput="setVolume(this.value)" title="الصوت">
+</div>
+
 <!-- CARD -->
 <div class="card">
   <div class="ornament">✦ ✦ ✦</div>
   <div class="title">رمضان مبارك 🌙</div>
   <div class="subtitle">Ramadan Greeting · بالدارجة المغربية</div>
-
   <div class="ig">
     <input type="text" id="nameInput" placeholder="دخل اسمك هنا..." maxlength="30" />
   </div>
-
   <button class="btn" onclick="generateGreeting()">
     <span>🎙️</span><span>ولّد التهنئة</span>
   </button>
-
   <div class="greeting-box" id="greetingBox"></div>
-
   <div class="audio-controls" id="audioControls">
     <button class="audio-btn" id="playBtn" onclick="speakGreeting()">▶️ سمع التهنئة بالصوت</button>
   </div>
-
   <div class="status" id="status"></div>
 </div>
 
 <script>
-// Stars
-const starsEl = document.getElementById('stars');
-for (let i=0;i<160;i++){
-  const s=document.createElement('div'); s.className='star';
-  const sz=(Math.random()*2.2+0.4).toFixed(1);
-  s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${(Math.random()*3+1.5).toFixed(1)}s;--delay:${(Math.random()*5).toFixed(1)}s;`;
-  starsEl.appendChild(s);
-}
-
-// Shooting stars
-const shootEl = document.getElementById('shooting');
-for (let i=0;i<6;i++){
-  const sh=document.createElement('div'); sh.className='shoot';
-  sh.style.cssText=`top:${Math.random()*40}%;left:${Math.random()*60}%;--ds:${(Math.random()*4+5).toFixed(1)}s;--dlay:${(Math.random()*14).toFixed(1)}s;`;
-  shootEl.appendChild(sh);
-}
-
-// Particles
+/* ══════════════════════════════════════════
+   STARS & PARTICLES
+══════════════════════════════════════════ */
+const starsEl=document.getElementById('stars');
+for(let i=0;i<160;i++){const s=document.createElement('div');s.className='star';const sz=(Math.random()*2.2+0.4).toFixed(1);s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${(Math.random()*3+1.5).toFixed(1)}s;--delay:${(Math.random()*5).toFixed(1)}s;`;starsEl.appendChild(s);}
+const shootEl=document.getElementById('shooting');
+for(let i=0;i<6;i++){const sh=document.createElement('div');sh.className='shoot';sh.style.cssText=`top:${Math.random()*40}%;left:${Math.random()*60}%;--ds:${(Math.random()*4+5).toFixed(1)}s;--dlay:${(Math.random()*14).toFixed(1)}s;`;shootEl.appendChild(sh);}
 const partEl=document.getElementById('particles');
 const pColors=['rgba(245,200,66,.7)','rgba(255,120,60,.6)','rgba(180,80,255,.6)','rgba(80,200,255,.5)','rgba(255,255,255,.4)'];
-for(let i=0;i<25;i++){
-  const p=document.createElement('div'); p.className='particle';
-  const sz=Math.random()*5+2;
-  p.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;background:${pColors[~~(Math.random()*pColors.length)]};--pr:${(Math.random()*12+10).toFixed(1)}s;--pd:${(Math.random()*10).toFixed(1)}s;--px:${(Math.random()*80-40).toFixed(0)}px;border-radius:50%;filter:blur(1px);`;
-  partEl.appendChild(p);
+for(let i=0;i<25;i++){const p=document.createElement('div');p.className='particle';const sz=Math.random()*5+2;p.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;background:${pColors[~~(Math.random()*pColors.length)]};--pr:${(Math.random()*12+10).toFixed(1)}s;--pd:${(Math.random()*10).toFixed(1)}s;--px:${(Math.random()*80-40).toFixed(0)}px;border-radius:50%;filter:blur(1px);`;partEl.appendChild(p);}
+
+/* visualizer bars */
+const vizEl=document.getElementById('visualizer');
+for(let i=0;i<7;i++){const b=document.createElement('div');b.className='vbar';b.style.setProperty('--bd',(Math.random()*.4+.25).toFixed(2)+'s');b.style.animationDelay=(Math.random()*.3).toFixed(2)+'s';b.style.height='3px';vizEl.appendChild(b);}
+
+/* ══════════════════════════════════════════
+   WEB AUDIO — RAMADAN AMBIENT MUSIC
+   Generates authentic oud-style melodies using
+   harmonic series, maqam scales & reverb
+══════════════════════════════════════════ */
+let audioCtx=null, masterGain=null, musicPlaying=false, currentTrackIdx=0;
+let scheduledNodes=[], loopTimer=null;
+
+// Maqam Rast scale (Arabic) frequencies starting from D3
+// D  E  F# G  A  Bb C  D
+const MAQAM_RAST = [146.83,164.81,184.00,196.00,220.00,233.08,261.63,293.66];
+// Maqam Bayati (another beautiful Arabic scale)
+const MAQAM_BAYATI = [146.83,155.56,174.61,196.00,220.00,233.08,261.63,293.66];
+// Maqam Hijaz (mystical, often used in nasheeds)
+const MAQAM_HIJAZ  = [146.83,155.56,185.00,196.00,220.00,233.08,261.63,293.66];
+
+const tracks = [
+  { name:'أنشودة رمضان', sub:'مقام راست', maqam:MAQAM_RAST,   tempo:1.1, icon:'🕌' },
+  { name:'ليلة القدر',   sub:'مقام بياتي', maqam:MAQAM_BAYATI, tempo:0.9, icon:'🌙' },
+  { name:'نور الهدى',    sub:'مقام حجاز',  maqam:MAQAM_HIJAZ,  tempo:1.0, icon:'⭐' },
+];
+
+function initAudio(){
+  if(audioCtx) return;
+  audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+  masterGain = audioCtx.createGain();
+  masterGain.gain.value = 0.6;
+  masterGain.connect(audioCtx.destination);
 }
 
-// Fireworks
+/* Reverb via convolver */
+function createReverb(ctx){
+  const conv=ctx.createConvolver();
+  const len=ctx.sampleRate*2.5;
+  const buf=ctx.createBuffer(2,len,ctx.sampleRate);
+  for(let c=0;c<2;c++){const d=buf.getChannelData(c);for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3);}
+  conv.buffer=buf; return conv;
+}
+
+/* OUD-style tone: sawtooth + triangle blend */
+function playNote(freq,startTime,duration,vol,reverb,mast){
+  const env=audioCtx.createGain();
+  env.gain.setValueAtTime(0,startTime);
+  env.gain.linearRampToValueAtTime(vol,startTime+0.04);
+  env.gain.exponentialRampToValueAtTime(vol*0.6,startTime+duration*0.3);
+  env.gain.exponentialRampToValueAtTime(0.0001,startTime+duration);
+
+  const osc1=audioCtx.createOscillator();
+  const osc2=audioCtx.createOscillator();
+  const mix=audioCtx.createGain();
+  osc1.type='sawtooth'; osc1.frequency.value=freq;
+  osc2.type='triangle'; osc2.frequency.value=freq*1.002; // slight detune = warmth
+  osc1.connect(mix); osc2.connect(mix);
+  mix.gain.value=0.5;
+
+  /* Soft low-pass for oud warmth */
+  const filt=audioCtx.createBiquadFilter();
+  filt.type='lowpass'; filt.frequency.value=1200; filt.Q.value=0.8;
+  mix.connect(filt); filt.connect(env);
+  env.connect(reverb); env.connect(mast);
+
+  osc1.start(startTime); osc1.stop(startTime+duration+0.1);
+  osc2.start(startTime); osc2.stop(startTime+duration+0.1);
+  scheduledNodes.push(osc1,osc2);
+}
+
+/* Percussion: doumbek-style */
+function playDrum(type,startTime,mast){
+  const env=audioCtx.createGain();
+  env.gain.setValueAtTime(0.5,startTime);
+  env.gain.exponentialRampToValueAtTime(0.0001,startTime+(type==='dum'?0.5:0.15));
+  const buf=audioCtx.createBuffer(1,~~(audioCtx.sampleRate*(type==='dum'?0.5:0.15)),audioCtx.sampleRate);
+  const d=buf.getChannelData(0);
+  for(let i=0;i<d.length;i++){
+    const t=i/audioCtx.sampleRate;
+    const f=type==='dum'?80:300;
+    d[i]=Math.sin(2*Math.PI*f*t)*Math.exp(-12*t)*(Math.random()*.1+.9);
+  }
+  const src=audioCtx.createBufferSource();
+  src.buffer=buf;
+  src.connect(env); env.connect(mast);
+  src.start(startTime);
+  scheduledNodes.push(src);
+}
+
+/* Ambient pad */
+function createPad(maqam,mast){
+  const padGain=audioCtx.createGain(); padGain.gain.value=0.04;
+  padGain.connect(mast);
+  [maqam[0],maqam[2],maqam[4]].forEach(freq=>{
+    const o=audioCtx.createOscillator();
+    const lfo=audioCtx.createOscillator();
+    const lfoG=audioCtx.createGain();
+    o.type='sine'; o.frequency.value=freq/2;
+    lfo.type='sine'; lfo.frequency.value=0.15;
+    lfoG.gain.value=1;
+    lfo.connect(lfoG); lfoG.connect(o.frequency);
+    o.connect(padGain);
+    o.start(); scheduledNodes.push(o); lfo.start(); scheduledNodes.push(lfo);
+  });
+}
+
+function scheduleLoop(maqam,tempo){
+  const t=audioCtx.currentTime;
+  const beat=0.55/tempo;
+  const rev=createReverb(audioCtx);
+  rev.connect(masterGain);
+
+  // Beautiful melodic phrase (oud improvisation style)
+  const phrase=[
+    [0,0,beat*1.5],[2,0,beat],[1,0.03,beat],[0,0.06,beat*2],
+    [3,0.09,beat*1.5],[4,0.12,beat],[3,0.15,beat],[2,0.18,beat*2],
+    [5,0.21,beat*1.5],[4,0.24,beat],[5,0.27,beat],[6,0.30,beat*2],
+    [5,0.27,beat],[4,0.24,beat],[3,0.21,beat],[2,0.18,beat*2],
+    [1,0.15,beat*1.5],[0,0.12,beat],[1,0.09,beat],[0,0.06,beat*3],
+  ];
+
+  const totalBeats=16;
+  const loopDur=totalBeats*beat;
+
+  phrase.forEach(([noteIdx,volMod,dur])=>{
+    const freq=maqam[noteIdx]||maqam[0];
+    playNote(freq,t+volMod*loopDur/1,dur,0.14+volMod*0.02,rev,masterGain);
+    // octave harmony
+    playNote(freq*2,t+volMod*loopDur/1,dur*0.7,0.04,rev,masterGain);
+  });
+
+  // Doumbek pattern: dum-tak-tak
+  for(let b=0;b<totalBeats;b++){
+    const bt=t+b*beat;
+    if(b%4===0) playDrum('dum',bt,masterGain);
+    if(b%4===2) playDrum('tak',bt,masterGain);
+    if(b%4===1||b%4===3) playDrum('tak',bt+beat*.5,masterGain);
+  }
+
+  loopTimer=setTimeout(()=>{ if(musicPlaying) scheduleLoop(maqam,tempo); }, (loopDur-0.3)*1000);
+}
+
+function stopAllNodes(){
+  clearTimeout(loopTimer);
+  scheduledNodes.forEach(n=>{ try{n.stop();}catch(e){} });
+  scheduledNodes=[];
+}
+
+function startMusic(){
+  initAudio();
+  if(audioCtx.state==='suspended') audioCtx.resume();
+  stopAllNodes();
+  const tr=tracks[currentTrackIdx];
+  createPad(tr.maqam,masterGain);
+  scheduleLoop(tr.maqam,tr.tempo);
+  musicPlaying=true;
+  document.getElementById('playMusicBtn').textContent='⏸';
+  document.getElementById('playMusicBtn').classList.add('active');
+  document.querySelectorAll('.vbar').forEach(b=>b.classList.add('active'));
+  updatePlayerInfo();
+}
+
+function stopMusic(){
+  stopAllNodes();
+  if(audioCtx){ try{audioCtx.suspend();}catch(e){} }
+  musicPlaying=false;
+  document.getElementById('playMusicBtn').textContent='▶';
+  document.getElementById('playMusicBtn').classList.remove('active');
+  document.querySelectorAll('.vbar').forEach(b=>b.classList.remove('active'));
+}
+
+function toggleMusic(){
+  if(musicPlaying) stopMusic();
+  else startMusic();
+}
+
+function prevTrack(){
+  currentTrackIdx=(currentTrackIdx-1+tracks.length)%tracks.length;
+  if(musicPlaying){ stopAllNodes(); const tr=tracks[currentTrackIdx]; createPad(tr.maqam,masterGain); scheduleLoop(tr.maqam,tr.tempo); }
+  updatePlayerInfo();
+}
+
+function nextTrack(){
+  currentTrackIdx=(currentTrackIdx+1)%tracks.length;
+  if(musicPlaying){ stopAllNodes(); const tr=tracks[currentTrackIdx]; createPad(tr.maqam,masterGain); scheduleLoop(tr.maqam,tr.tempo); }
+  updatePlayerInfo();
+}
+
+function updatePlayerInfo(){
+  const tr=tracks[currentTrackIdx];
+  document.getElementById('mpTitle').textContent=tr.name;
+  document.getElementById('mpSub').textContent=tr.sub;
+  document.querySelector('.mp-icon').textContent=tr.icon;
+}
+
+function setVolume(v){
+  if(masterGain) masterGain.gain.value=v/100;
+}
+
+/* ══════════════════════════════════════════
+   FIREWORKS & CELEBRATE
+══════════════════════════════════════════ */
 function launchFirework(x,y){
   const fw=document.getElementById('fireworks');
   const cols=['#f5c842','#ff4444','#44ff88','#bb44ff','#44bbff','#ff88aa','#ffaa44'];
   for(let i=0;i<22;i++){
     const el=document.createElement('div'); el.className='firework';
-    const angle=(i/22)*360, dist=Math.random()*80+40, rad=angle*Math.PI/180;
+    const angle=(i/22)*360,dist=Math.random()*80+40,rad=angle*Math.PI/180;
     el.style.cssText=`left:${x}px;top:${y}px;background:${cols[~~(Math.random()*cols.length)]};--fx:${(Math.cos(rad)*dist).toFixed(0)}px;--fy:${(Math.sin(rad)*dist).toFixed(0)}px;animation-delay:${(Math.random()*.2).toFixed(2)}s;box-shadow:0 0 6px 2px currentColor;`;
-    fw.appendChild(el);
-    setTimeout(()=>el.remove(),1300);
+    fw.appendChild(el); setTimeout(()=>el.remove(),1300);
   }
 }
-
 function celebrate(){
-  [[25,20],[70,25],[15,45],[80,35],[50,30],[60,55],[35,60]].forEach(([xp,yp],i)=>{
-    setTimeout(()=>launchFirework(window.innerWidth*xp/100,window.innerHeight*yp/100),i*180);
-  });
+  [[25,20],[70,25],[15,45],[80,35],[50,30],[60,55],[35,60]].forEach(([xp,yp],i)=>setTimeout(()=>launchFirework(window.innerWidth*xp/100,window.innerHeight*yp/100),i*180));
   const cf=document.getElementById('confetti');
   const items=['⭐','🌙','✨','🌟','💫','🕌','❤️','🎊'];
   for(let i=0;i<32;i++){
     const el=document.createElement('div'); el.className='conf';
     el.textContent=items[~~(Math.random()*items.length)];
     el.style.cssText=`left:${Math.random()*100}%;--fs:${(Math.random()*1+.8).toFixed(1)}rem;--cf:${(Math.random()*3+3).toFixed(1)}s;--cd:${(Math.random()*2).toFixed(1)}s;--cx:${(Math.random()*200-100).toFixed(0)}px;`;
-    cf.appendChild(el);
-    setTimeout(()=>el.remove(),6500);
+    cf.appendChild(el); setTimeout(()=>el.remove(),6500);
   }
 }
 
+/* ══════════════════════════════════════════
+   GREETING LOGIC
+══════════════════════════════════════════ */
 const templates=[
   n=>`سلام ${n}! رمضان مبارك سعيد عليك. الله يدخله عليك بالصحة والراحة، ويجعل هذا الشهر خير وبركة عليك وعلى عيلتك. رمضان كريم!`,
   n=>`${n}، مبروك عليك شهر رمضان المبارك! الله يعطيك الصحة والسعادة، ويقبل صيامك وقيامك. شهر مبارك عليك وعلى من تحب!`,
   n=>`يا ${n}، رمضان وصل! الله يبارك فيك وفي عيلتك، ويجعل هذا الشهر الكريم فرحة وخير ليك. رمضان مبارك صاحبي!`,
   n=>`مبروك عليك رمضان يا ${n}! الله يجعله شهر صحة وسعادة، ويقبل منك الصيام والقيام. كل عام وأنت بخير!`,
 ];
-
 let currentText='';
 
 function generateGreeting(){
   const name=document.getElementById('nameInput').value.trim();
   if(!name){
     const s=document.getElementById('status');
-    s.style.color='#ff8866'; s.textContent='⚠️ عفاك دخل اسمك أولاً';
-    setTimeout(()=>{s.style.color='';s.textContent='';},3000);
-    return;
+    s.style.color='#ff8866';s.textContent='⚠️ عفاك دخل اسمك أولاً';
+    setTimeout(()=>{s.style.color='';s.textContent='';},3000);return;
   }
   currentText=templates[~~(Math.random()*templates.length)](name);
   const box=document.getElementById('greetingBox');
-  box.style.display='block'; box.textContent='';
+  box.style.display='block';box.textContent='';
   let idx=0;
-  const t=setInterval(()=>{ box.textContent+=currentText[idx++]; if(idx>=currentText.length) clearInterval(t); },28);
+  const t=setInterval(()=>{box.textContent+=currentText[idx++];if(idx>=currentText.length)clearInterval(t);},28);
   document.getElementById('audioControls').style.display='flex';
   document.getElementById('status').style.color='rgba(255,255,255,.32)';
   document.getElementById('status').textContent='🎉 اضغط على الزر باش تسمع التهنئة';
@@ -478,22 +463,88 @@ function generateGreeting(){
 }
 
 function speakGreeting(){
-  if(!currentText||!window.speechSynthesis) return;
+  if(!currentText||!window.speechSynthesis)return;
   window.speechSynthesis.cancel();
   const u=new SpeechSynthesisUtterance(currentText);
   const ar=window.speechSynthesis.getVoices().find(v=>v.lang.startsWith('ar'));
-  if(ar) u.voice=ar;
-  u.lang='ar-MA'; u.rate=.88; u.pitch=1.05;
+  if(ar)u.voice=ar;
+  u.lang='ar-MA';u.rate=.88;u.pitch=1.05;
   const btn=document.getElementById('playBtn');
-  btn.textContent='⏹️ جاري التشغيل...'; btn.classList.add('playing');
+  btn.textContent='⏹️ جاري التشغيل...';btn.classList.add('playing');
   document.getElementById('status').textContent='🔊 كيقرا التهنئة...';
-  u.onend=()=>{ btn.textContent='▶️ سمع التهنئة بالصوت'; btn.classList.remove('playing'); document.getElementById('status').textContent='✅ سالي التشغيل'; };
-  u.onerror=()=>{ btn.textContent='▶️ سمع التهنئة بالصوت'; btn.classList.remove('playing'); };
+  u.onend=()=>{btn.textContent='▶️ سمع التهنئة بالصوت';btn.classList.remove('playing');document.getElementById('status').textContent='✅ سالي التشغيل';};
+  u.onerror=()=>{btn.textContent='▶️ سمع التهنئة بالصوت';btn.classList.remove('playing');};
   window.speechSynthesis.speak(u);
 }
 
 window.speechSynthesis.onvoiceschanged=()=>window.speechSynthesis.getVoices();
-document.getElementById('nameInput').addEventListener('keydown',e=>{ if(e.key==='Enter') generateGreeting(); });
+document.getElementById('nameInput').addEventListener('keydown',e=>{if(e.key==='Enter')generateGreeting();});
+
+/* ══════════════════════════════════════════
+   AUTOPLAY — start on first user interaction
+   Browsers block audio before a user gesture.
+   We show a beautiful splash overlay, then on
+   ANY click/touch we init & start music silently.
+══════════════════════════════════════════ */
+let audioStarted = false;
+
+function tryAutoplay(){
+  if(audioStarted) return;
+  audioStarted = true;
+  // hide overlay with fade
+  const ov = document.getElementById('startOverlay');
+  if(ov){ ov.style.opacity='0'; setTimeout(()=>ov.remove(),600); }
+  startMusic();
+}
+
+// Listen on document — any interaction triggers music
+['click','touchstart','keydown'].forEach(ev=>{
+  document.addEventListener(ev, tryAutoplay, { once:true, passive:true });
+});
+
+// Also handle Page Visibility API — resume/suspend when tab hidden/shown
+document.addEventListener('visibilitychange',()=>{
+  if(!audioCtx) return;
+  if(document.hidden){
+    if(musicPlaying) audioCtx.suspend();
+  } else {
+    if(musicPlaying) audioCtx.resume();
+  }
+});
 </script>
+
+<!-- AUTOPLAY SPLASH OVERLAY -->
+<div id="startOverlay" style="
+  position:fixed;inset:0;z-index:999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:rgba(5,5,16,0.92);
+  backdrop-filter:blur(8px);
+  transition:opacity .6s ease;
+  cursor:pointer;
+" onclick="tryAutoplay()">
+  <div style="animation:floatMoon 3s ease-in-out infinite;text-align:center;">
+    <div style="font-size:4rem;margin-bottom:16px;filter:drop-shadow(0 0 20px rgba(245,200,66,.7))">🕌</div>
+    <div style="font-family:'Lateef',serif;font-size:2.6rem;color:#f5c842;text-shadow:0 0 30px rgba(245,200,66,.6);margin-bottom:8px;">
+      رمضان مبارك
+    </div>
+    <div style="color:rgba(255,255,255,.5);font-family:'Amiri',serif;font-size:1.05rem;margin-bottom:32px;">
+      اضغط في أي مكان باش تبدأ التجربة 🎵
+    </div>
+    <div style="
+      display:inline-flex;align-items:center;gap:10px;
+      padding:14px 32px;
+      background:linear-gradient(135deg,#f5c842,#e8980a);
+      border-radius:50px;
+      color:#0a0a1a;font-family:'Amiri',serif;font-weight:700;font-size:1.1rem;
+      box-shadow:0 0 30px rgba(245,200,66,.5);
+      animation:btnShine 2s ease-in-out infinite;
+    ">
+      <span>▶</span><span>ابدأ مع الموسيقى</span>
+    </div>
+    <div style="margin-top:20px;color:rgba(255,255,255,.25);font-size:.8rem;font-family:'Amiri',serif;">
+      ✦ مقام راست · بياتي · حجاز ✦
+    </div>
+  </div>
+</div>
 </body>
 </html>
