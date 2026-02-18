@@ -382,7 +382,9 @@ function stopMusic(){
 
 function toggleMusic(){
   if(musicPlaying) stopMusic();
-  else startMusic();
+  // else startMusic();
+  else player.playVideo();
+
 }
 
 function prevTrack(){
@@ -494,7 +496,8 @@ function tryAutoplay(){
   // hide overlay with fade
   const ov = document.getElementById('startOverlay');
   if(ov){ ov.style.opacity='0'; setTimeout(()=>ov.remove(),600); }
-  startMusic();
+  // startMusic();
+  if(player) player.playVideo();
 }
 
 // Listen on document — any interaction triggers music
@@ -546,5 +549,50 @@ document.addEventListener('visibilitychange',()=>{
     </div>
   </div>
 </div>
+
+<!-- YOUTUBE BACKGROUND PLAYER -->
+<div id="ytPlayer" style="
+position:fixed;
+bottom:0;
+right:0;
+width:1px;
+height:1px;
+opacity:0;
+pointer-events:none;
+z-index:-1;
+"></div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<script>
+let player;
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('ytPlayer', {
+    height: '1',
+    width: '1',
+
+    // بدل ID هنا حسب الأنشودة
+    videoId: 'Qv0N0s3Hq9E', // رمضان جانا
+
+    playerVars: {
+      autoplay: 1,
+      controls: 0,
+      loop: 1,
+      playlist: 'Qv0N0s3Hq9E',
+      modestbranding: 1
+    },
+
+    events: {
+      'onReady': (event)=>{
+        event.target.setVolume(60);
+        event.target.playVideo();
+      }
+    }
+  });
+}
+</script>
+
+
 </body>
 </html>
