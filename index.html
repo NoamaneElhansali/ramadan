@@ -381,11 +381,21 @@ function stopMusic(){
 }
 
 function toggleMusic(){
-  if(musicPlaying) stopMusic();
-  // else startMusic();
-  else player.playVideo();
+  if(!player || !ytReady) return;
 
+  if(ytPlaying){
+    player.pauseVideo();
+    ytPlaying=false;
+    document.getElementById('playMusicBtn').textContent='▶';
+    document.getElementById('playMusicBtn').classList.remove('active');
+  }else{
+    player.playVideo();
+    ytPlaying=true;
+    document.getElementById('playMusicBtn').textContent='⏸';
+    document.getElementById('playMusicBtn').classList.add('active');
+  }
 }
+
 
 function prevTrack(){
   currentTrackIdx=(currentTrackIdx-1+tracks.length)%tracks.length;
@@ -407,8 +417,11 @@ function updatePlayerInfo(){
 }
 
 function setVolume(v){
-  if(masterGain) masterGain.gain.value=v/100;
+  if(player && ytReady){
+    player.setVolume(v);
+  }
 }
+
 
 /* ══════════════════════════════════════════
    FIREWORKS & CELEBRATE
@@ -493,12 +506,21 @@ let audioStarted = false;
 function tryAutoplay(){
   if(audioStarted) return;
   audioStarted = true;
-  // hide overlay with fade
+
   const ov = document.getElementById('startOverlay');
   if(ov){ ov.style.opacity='0'; setTimeout(()=>ov.remove(),600); }
-  // startMusic();
-  if(player) player.playVideo();
+
+  if(player && ytReady){
+    player.unMute();
+    player.setVolume(60);
+    player.playVideo();
+    ytPlaying = true;
+
+    document.getElementById('playMusicBtn').textContent='⏸';
+    document.getElementById('playMusicBtn').classList.add('active');
+  }
 }
+
 
 // Listen on document — any interaction triggers music
 ['click','touchstart','keydown'].forEach(ev=>{
@@ -565,32 +587,30 @@ z-index:-1;
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
+let ytReady = false;
+let ytPlaying = false;
 let player;
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('ytPlayer', {
     height: '1',
     width: '1',
-
-    // بدل ID هنا حسب الأنشودة
-    videoId: 'Qv0N0s3Hq9E', // رمضان جانا
-
+    videoId: 'Qv0N0s3Hq9E',
     playerVars: {
-      autoplay: 1,
+      autoplay: 0,
       controls: 0,
       loop: 1,
       playlist: 'Qv0N0s3Hq9E',
       modestbranding: 1
     },
-
     events: {
-      'onReady': (event)=>{
-        event.target.setVolume(60);
-        event.target.playVideo();
+      'onReady': () => {
+        ytReady = true;
       }
     }
   });
 }
+
 </script>
 
 
